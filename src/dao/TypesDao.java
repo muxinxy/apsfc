@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.sun.glass.ui.CommonDialogs.Type;
-
 import po.Types;
 import util.DBUtil;
 

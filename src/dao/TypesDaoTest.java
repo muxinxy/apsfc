@@ -1,12 +1,8 @@
 package dao;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import org.junit.Test;
-
-import com.sun.glass.ui.CommonDialogs.Type;
 
 import po.Types;
 
@@ -30,7 +26,7 @@ public class TypesDaoTest {
 
 	@Test
 	public void testChg() {
-		int id=11;
+		int id=2;
 		String name="川菜";
 		int result=typesDao.chg(id, name);
 		System.out.println(result);
@@ -55,70 +51,4 @@ public class TypesDaoTest {
 		Types types=typesDao.findByName("蒸菜");
 		System.out.println(types);
 	}
-
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testObject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetClass() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEquals() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testClone() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testNotify() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testNotifyAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWaitLong() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWaitLongInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWait() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFinalize() {
-		fail("Not yet implemented");
-	}
-
 }

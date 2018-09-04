@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <link href="images/skin.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
@@ -40,61 +42,18 @@ body {
 								<td class="line_table" align="center" width="20%"></td>
 								<td class="line_table" align="center" width="20%"></td>
 							</tr>
-
+						<c:forEach items="${typesList}" var="item">
 							<tr>
 								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">1</span></td>
+									class="left_txt">${item.id}</span></td>
 								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">凉拌菜</span></td>
+									class="left_txt">${item.name}</span></td>
 								<td class="line_table" align="center" width="20%"><a
-									href="type_update.jsp" target="main">修改</a></td>
+									href="${pageContext.request.contextPath}/TypesServlet?method=findById&id=${item.id}" target="main">修改</a></td>
 								<td class="line_table" align="center" width="20%"><a
-									href="#" target="main">删除</a></td>
+									href="${pageContext.request.contextPath}/TypesServlet?method=del&id=${item.id}">删除</a></td>
 							</tr>
-
-							<tr>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">2</span></td>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">炒菜</span></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="type_update.jsp" target="main">修改</a></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="#" target="main">删除</a></td>
-							</tr>
-
-							<tr>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">6</span></td>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">炒饭</span></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="type_update.jsp" target="main">修改</a></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="#" target="main">删除</a></td>
-							</tr>
-
-							<tr>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">10</span></td>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">蒸菜</span></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="type_update.jsp" target="main">修改</a></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="#" target="main">删除</a></td>
-							</tr>
-
-							<tr>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">11</span></td>
-								<td class="line_table" align="center" width="30%"><span
-									class="left_txt">川菜</span></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="type_update.jsp" target="main">修改</a></td>
-								<td class="line_table" align="center" width="20%"><a
-									href="#" target="main">删除</a></td>
-							</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</td>

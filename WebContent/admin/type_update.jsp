@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <script type="text/javascript" src="js/verify.js"></script>
 <script type="text/javascript">
 	function verifyInfo() {
@@ -24,7 +25,7 @@
 				<p>修改类别</p>
 
 				<div align="center">
-					<form action="#" method="post"
+					<form action="${pageContext.request.contextPath}/TypesServlet?method=chg" method="post"
 						name="form1" onSubmit="return verifyInfo()">
 						<table id="table2" class="line_table"
 							style="width: 100%; margin: 0; padding: 0" cellSpacing="0"
@@ -34,8 +35,8 @@
 								<td class="line_table" height="25" align="right" width="40%"><span
 									class="left_bt2">菜品类别：</span></td>
 								<td class="line_table" height="25" width="60%"><input
-									type="text" name="name" size="45" value="凉拌菜">
-									<input type="hidden" name="id" value="1" /></td>
+									type="text" name="name" size="45" value="${type.name}">
+									<input type="hidden" name="id" value="${type.id}" /></td>
 							</tr>
 
 							<tr>
