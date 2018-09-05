@@ -25,7 +25,7 @@
 
 				<div align="center">
 
-					<form action="#" method="post" name="form1"
+					<form action="${pageContext.request.contextPath}/TypesServlet?method=add" method="post" name="form1"
 						onSubmit="return verifyInfo()">
 
 

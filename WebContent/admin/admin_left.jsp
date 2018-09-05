@@ -136,7 +136,7 @@ H1 a {
         <ul class="MM">
         
         <li><a href="../admin/menus_add.jsp" target="main">添加新菜单</a></li>
-        <li><a href="../admin/menus.jsp" target="main">菜单信息列表</a></li>
+        <li><a href="${pageContext.request.contextPath}/MenusServlet?method=findByPage" target="main">菜单信息列表</a></li>
       
         </ul>
       </div>
@@ -145,7 +145,7 @@ H1 a {
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         </table>
         <ul class="MM">
-            <li><a href="../admin/type_add.jsp" target="main">添加新类别</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/type_add.jsp" target="main">添加新类别</a></li>
             <li><a href="${pageContext.request.contextPath}/TypesServlet?method=findAll" target="main">类别信息列表</a></li>
         </ul>
       </div>

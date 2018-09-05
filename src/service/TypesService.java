@@ -22,7 +22,7 @@ public class TypesService {
 	//修改
 	public int chg(int id,String name) {
 		Types type=typesDao.findByName(name);
-		if (type.getId()!=id) {
+		if (type!=null && type.getId()!=id) {
 			return -1;
 		}
 		return typesDao.chg(id, name);
