@@ -1,40 +1,42 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <link href="images/skin.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="js/verify.js"></script>
 <script type="text/javascript">
 	function verifyInfo() {
 		//菜品名称
-		if(!verifyNotNull(document.form1.name.value)) {
+		if (!verifyNotNull(document.form1.name.value)) {
 			alert("菜品名称不能为空!");
 			return false;
 		}
 		//原料
-		if(!verifyNotNull(document.form1.burden.value)) {
+		if (!verifyNotNull(document.form1.burden.value)) {
 			alert("原料不能为空");
 			return false;
 		}
 		//市场价格
 		/* debugger; */
-		if(!verifyPositiveInt(document.form1.price.value)) {
+		if (!verifyPositiveInt(document.form1.price.value)) {
 			alert("市场价格必须为正整数");
 			return false;
 		}
 		//会员价格
-		if(!verifyPositiveInt(document.form1.price1.value)) {
+		if (!verifyPositiveInt(document.form1.price1.value)) {
 			alert("会员价格必须为正整数");
 			return false;
 		}
 		//说明
-		if(!verifyNotNull(document.form1.brief.value)) {
+		if (!verifyNotNull(document.form1.brief.value)) {
 			alert("说明不能为空");
 			return false;
 		}
 		//图片
-		if(!verifyNotNull(document.form1.img.value)) {
+		if (!verifyNotNull(document.form1.img.value)) {
 			alert("图片不能为空");
 			return false;
 		}
@@ -52,7 +54,7 @@
 
 				<div align="center">
 
-					<form action="../MenuAddServlet" method="post" name="form1"
+					<form action="${pageContext.request.contextPath}/MenusServlet?method=add" method="post" name="form1"
 						onSubmit="return verifyInfo()" enctype="multipart/form-data">
 
 
@@ -92,13 +94,11 @@
 							<tr>
 								<td class="line_table" height="25" align="right" width="20%"><span
 									class="left_bt2">菜品类别：</span></td>
-								<td class="line_table" height="25" width="80%">
-								<select name="typeid">
-										<option value="1">凉拌菜</option>
-										<option value="2">炒菜</option>
-										<option value="6">炒饭</option>
-										<option value="10">蒸菜</option>
-										<option value="11">川菜</option>
+								<td class="line_table" height="25" width="80%"><select
+									name="typeid">
+										<c:forEach items="${typesList}" var="item">
+											<option value="${item.id}">${item.name}</option>
+										</c:forEach>
 								</select></td>
 							</tr>
 

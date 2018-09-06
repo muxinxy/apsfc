@@ -106,7 +106,7 @@ public class TypesServlet extends HttpServlet {
     	type.setName(name);
     	int result=typesService.add(type);
     	PrintWriter out=response.getWriter();
-    	//根据修改的返回结果处理
+    	//根据返回结果处理
     	if (result==1) {
 			//弹出对话框
     		//跳转到查询所有界面

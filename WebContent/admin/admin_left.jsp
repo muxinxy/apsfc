@@ -135,7 +135,7 @@ H1 a {
         </table>
         <ul class="MM">
         
-        <li><a href="../admin/menus_add.jsp" target="main">添加新菜单</a></li>
+        <li><a href="${pageContext.request.contextPath}/MenusServlet?method=preAdd" target="main">添加新菜单</a></li>
         <li><a href="${pageContext.request.contextPath}/MenusServlet?method=findByPage" target="main">菜单信息列表</a></li>
       
         </ul>
@@ -154,8 +154,8 @@ H1 a {
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         </table>
         <ul class="MM">
-		   <li><a href="../admin/notice_add.jsp" target="main">添加新通告</a></li>
-            <li><a href="../admin/notice.jsp" target="main">通告信息列表</a></li>
+		   <li><a href="${pageContext.request.contextPath}/admin/notice_add.jsp" target="main">添加新通告</a></li>
+            <li><a href="${pageContext.request.contextPath}/NoticeServlet?method=findAll" target="main">通告信息列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">销售订单管理</a></h1>

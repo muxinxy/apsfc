@@ -63,7 +63,7 @@ body {
 									<td class="line_table" align="center"><a
 										href="menus_update.jsp?">${item.name}</a></td>
 									<td class="line_table" align="center"><a
-										href="../img/m_tangcupaigu.gif"><img src="../img/m_tangcupaigu.gif"
+										href="${pageContext.request.contextPath}/${item.imgpath}"><img src="${pageContext.request.contextPath}/${item.imgpath}"
 											width="30" height="30"></a></td>
 									<td class="line_table" align="center"><span
 										class="left_txt">${item.burden}</span></td>

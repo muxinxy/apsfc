@@ -107,7 +107,7 @@
 								<td class="line_table" align="right" width="20%"><span
 									class="left_bt2">展示图片</span>：</td>
 								<td class="line_table" width="80%" align="left"><img
-									src="../img/m_fenzhengrou.gif"><input type="hidden" name="id" value="1"/></td>
+									src="../img/m_fenzhengrou.gif"><input type="hidden" name="id" value="${menu.id}"/></td>
 							</tr>
 
 							<tr>

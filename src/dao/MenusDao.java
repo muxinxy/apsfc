@@ -120,7 +120,7 @@ public class MenusDao {
 		}
 		return count;
 	}
-	//查询所有——分页查询
+	//查询所有
 	public ArrayList<MenusInfo> findAll() {
 		//获取连接
 		Connection conn=DBUtil.getConn();
