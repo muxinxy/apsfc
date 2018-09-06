@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.List;
+
+import po.Menus;
 import po.Page;
 import util.PageUtil;
 import vo.MenusInfo;
@@ -12,6 +14,24 @@ import vo.MenusInfo;
 public class MenusDaoTest {
 	MenusDao menusDao=new MenusDao();
 
+	@Test
+	public void testAdd() {
+		
+	}
+	
+	@Test
+	public void testDel() {
+		
+	}
+	
+	@Test
+	public void testChg() {
+		Menus menus=new Menus();
+		menus.setName("水煮鱼11");
+		int result=menusDao.chg(12, menus);
+		System.out.println(result);
+	}
+	
 	@Test
 	public void testCount() {
 		System.out.println(menusDao.count());
@@ -31,6 +51,18 @@ public class MenusDaoTest {
 		for(MenusInfo menusInfo:list){
 			System.out.println(menusInfo);
 		}
+	}
+	
+	@Test
+	public void testFindById() {
+		Menus menus=new Menus();
+		menus=menusDao.findById(15);
+		System.out.println(menus);
+	}
+	
+	@Test
+	public void testFindByName() {
+		
 	}
 
 }
