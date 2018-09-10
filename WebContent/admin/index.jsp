@@ -53,7 +53,7 @@
 											<tr>
 												<td height="164" colspan="2" align="center">
 
-													<form name="form1" action="main.jsp" method="post"
+													<form name="form1" action="${pageContext.request.contextPath}/AdminServlet?method=login" method="post"
 														onSubmit="return verifyLogin()">
 														<table cellSpacing="0" cellPadding="0" width="100%"
 															border="0" height="143" id="table212">

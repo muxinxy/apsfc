@@ -1,8 +1,10 @@
 <%@page import="java.util.*"%>
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <link href="images/skin.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
@@ -59,157 +61,97 @@ body {
 								<td class="line_table" align="center" colspan="2"><span
 									class="left_bt2">确认订单</span></td>
 							</tr>
-						
+						<c:forEach items="${ordersPage.list}" var="item">
                              <tr>
 								<td class="line_table" align="center"><span
-									class="left_txt">4</span></td>
+									class="left_txt">${item.userid}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
+									class="left_txt">${item.realname}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
+									class="left_txt">${item.phone}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
+									class="left_txt">${item.adress}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">糖醋排骨</span></td>
+									class="left_txt">${item.menuname}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
+									class="left_txt">${item.menusum}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">24</span></td>
+									class="left_txt">${item.price}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">24</span></td>
+									class="left_txt">${item.sum}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">2017-06-20 16:35:40</span></td>
+									class="left_txt">${item.times}</span></td>
 								<td class="line_table" align="center"><span
-									class="left_txt">否</span></td>
-
-								<td class="line_table" align="center"><a
-									href="#">确认</a></td>
-								<td class="line_table" align="center"><a
-									href="#">取消</a></td>
+									class="left_txt">
+									<c:choose>
+									<c:when test="${item.delivery eq 1}">
+										是
+									</c:when>
+									<c:otherwise>
+										否
+									</c:otherwise>
+								</c:choose>
+									</span></td>
+								<td class="line_table" align="center">
+								<c:choose>
+									<c:when test="${item.delivery eq 1}">
+										确认
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=yes&id=${item.id}">确认</a>
+									</c:otherwise>
+								</c:choose>
+								</td>
+								<td class="line_table" align="center">
+								<c:choose>
+									<c:when test="${item.delivery eq 0}">
+										取消
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=no&id=${item.id}">取消</a>
+									</c:otherwise>
+								</c:choose>
+								</td>
 							</tr>
-							
-							<tr>
-								<td class="line_table" align="center"><span
-									class="left_txt">4</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">咸肉菜饭</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">2017-06-20 16:35:40</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">否</span></td>
-
-								<td class="line_table" align="center"><a
-									href="#">确认</a></td>
-								<td class="line_table" align="center"><a
-									href="#">取消</a></td>
-							</tr>
-							
-														<tr>
-								<td class="line_table" align="center"><span
-									class="left_txt">4</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">咸肉菜饭</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">2017-06-20 16:35:40</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">否</span></td>
-
-								<td class="line_table" align="center"><a
-									href="#">确认</a></td>
-								<td class="line_table" align="center"><a
-									href="#">取消</a></td>
-							</tr>
-							
-														<tr>
-								<td class="line_table" align="center"><span
-									class="left_txt">4</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">咸肉菜饭</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">2017-06-20 16:35:40</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">否</span></td>
-
-								<td class="line_table" align="center"><a
-									href="#">确认</a></td>
-								<td class="line_table" align="center"><a
-									href="#">取消</a></td>
-							</tr>
-							
-														<tr>
-								<td class="line_table" align="center"><span
-									class="left_txt">4</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">咸肉菜饭</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">2017-06-20 16:35:40</span></td>
-								<td class="line_table" align="center"><span
-									class="left_txt">否</span></td>
-
-								<td class="line_table" align="center"><a
-									href="#">确认</a></td>
-								<td class="line_table" align="center"><a
-									href="#">取消</a></td>
-							</tr>
-							
+							</c:forEach>
 							<tr>
 								<td class="line_table" align="center" colspan="12" height="20">
-								<span class="left_bt2">第1页
-										&nbsp;&nbsp;共4页
+								<span class="left_bt2">第${ordersPage.currentPage}页
+										&nbsp;&nbsp;共${ordersPage.totalPage}页
 								</span>&nbsp;&nbsp; 
-								    <a href="#">[首页]</a>
-								    <a href="#">[尾页]</a>&nbsp;&nbsp; 
-								    <a href="#">[上一页]</a>
-									<a href="#">[下一页]</a>
-									
+								    <c:choose>
+									<c:when test="${ordersPage.currentPage eq 1}">
+										[首页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=findByPage&currentPage=1">[首页]</a>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${ordersPage.currentPage eq ordersPage.totalPage}">
+										[尾页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=findByPage&currentPage=${ordersPage.totalPage}">[尾页]</a>
+									</c:otherwise>
+								</c:choose>
+								    &nbsp;&nbsp;
+								<c:choose>
+									<c:when test="${ordersPage.hasPrePage eq false}">
+										[上一页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=findByPage&currentPage=${ordersPage.currentPage-1}">[上一页]</a>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${ordersPage.hasNextPage eq false}">
+										[下一页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=findByPage&currentPage=${ordersPage.currentPage+1}">[下一页]</a>
+									</c:otherwise>
+								</c:choose>
 								</td>
 							</tr>
 							

@@ -163,15 +163,15 @@ H1 a {
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         </table>
         <ul class="MM">
-          <li><a href="../admin/order.jsp" target="main">销售订单信息列表</a></li>
+          <li><a href="${pageContext.request.contextPath}/OrdersServlet?method=findByPage" target="main">销售订单信息列表</a></li>
           <li><a href="../admin/order_search.jsp" target="main">销售订单查询</a></li>
-          <li><a href="../admin/order_statistic.jsp" target="main">本日销售额统计</a></li>
+          <li><a href="${pageContext.request.contextPath}/OrdersServlet?method=findStatistics" target="main">本日销售额统计</a></li>
         </ul>
       </div>
     </div>
 
     <h1 class="type"><a href="../admin/admin_update.jsp" target="main">系统用户管理</a></h1>
-    <h1 class="type"><a href="#" target="main">注销退出</a></h1>
+    <h1 class="type"><a href="${pageContext.request.contextPath}/AdminServlet?method=logout" target="main">注销退出</a></h1>
       </td>
   </tr>
 </table>

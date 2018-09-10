@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <link href="images/skin.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
@@ -42,33 +44,23 @@ body {
 								<td class="line_table" align="center" width="25%"><span
 									class="left_bt2">合计</span></td>
 							</tr>
-
-
+						<c:set var="sums" value="0"/>
+						<c:forEach items="${orderStatistics}" var="item">
 							<tr>
 								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">糖醋排骨	</span></td>
+									class="left_txt">${item.menuname}</span></td>
 								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">2</span></td>
+									class="left_txt">${item.menusum}</span></td>
 								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">24.0</span></td>
+									class="left_txt">${item.price}</span></td>
 								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">48.0元</span></td>
+									class="left_txt">${item.sum}元</span></td>
 							</tr>
-
-							<tr>
-								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">咸肉菜饭	</span></td>
-								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">1</span></td>
-								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">12.0</span></td>
-								<td class="line_table" align="center" width="25%"><span
-									class="left_txt">12.0元</span></td>
-							</tr>
-							
+							<c:set var="sums" value="${sums+item.sum}"/>
+						</c:forEach>	
 							<tr>
 								<td class="line_table" align="center" colspan="8"><span
-									class="left_bt2">本日销售总额：60元
+									class="left_bt2">本日销售总额：${sums}元
 								</span></td>
 							</tr>
 						

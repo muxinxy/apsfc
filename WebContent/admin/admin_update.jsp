@@ -30,7 +30,7 @@
 
 				<div align="center">
 
-					<form name="form1" action="#"
+					<form name="form1" action="${pageContext.request.contextPath}/AdminServlet?method=chg"
 						method="post" onsubmit="return verifyInfo()">
 						<table id="table2" class="line_table"
 							style="width: 100%; margin: 0; padding: 0" cellSpacing="0"
@@ -46,14 +46,14 @@
 									<td class="line_table" align="right" width="45%"><span
 										class="left_bt2">管理员姓名</span></td>
 									<td class="line_table" align="left" width="55%"><input
-										type="text" name="name" size="20" value="sa"></td>
+										type="text" name="name" size="20" value="${admin.name}"></td>
 								</tr>
 								<tr>
 									<td class="line_table" align="right" width="45%"><span
 										class="left_bt2">管理员密码</span></td>
 									<td class="line_table" align="left" width="55%"><input
 										type="password" name="pwd" size="20">
-										<input type="hidden" name="id" value="1" />
+										<input type="hidden" name="id" value="${admin.id}" />
 									</td>
 								</tr>
 								<tr>
