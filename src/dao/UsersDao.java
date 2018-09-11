@@ -6,26 +6,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import po.Admin;
+import po.Users;
 import util.DBUtil;
 
-public class AdminDao {
+public class UsersDao {
 	// 根据用户名和密码查询
-	public Admin findByNameAndPwd(String name, String pwd) {
+	public Users findByNameAndPwd(String name, String pwd) {
 		Connection conn = DBUtil.getConn();
-		String sql = "select id,name,pwd from admin where name=? && pwd=?";
+		String sql = "select id,name,pwd from users where name=? && pwd=?";
 		PreparedStatement pstmt = null;
 		ResultSet rSet = null;
-		Admin admin = null;
+		Users user = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, pwd);
 			rSet = pstmt.executeQuery();
 			if (rSet.next()) {
-				admin = new Admin();
-				admin.setId(rSet.getInt(1));
-				admin.setName(rSet.getString(2));
-				admin.setPwd(rSet.getString(3));
+				user = new Users();
+				user.setId(rSet.getInt(1));
+				user.setName(rSet.getString(2));
+				user.setPwd(rSet.getString(3));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -35,24 +36,24 @@ public class AdminDao {
 			DBUtil.closePstmt(pstmt);
 			DBUtil.closeConn(conn);
 		}
-		return admin;
+		return user;
 	}
 
 	// 根据用户名查询
-	public Admin findByName(String name) {
+	public Users findByName(String name) {
 		Connection conn = DBUtil.getConn();
-		String sql = "select * from admin where name=?";
+		String sql = "select * from users where name=?";
 		PreparedStatement pstmt = null;
 		ResultSet rSet = null;
-		Admin admin = null;
+		Users user = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rSet = pstmt.executeQuery();
 			if (rSet.next()) {
-				admin = new Admin();
-				admin.setName(rSet.getString(1));
-				admin.setPwd(rSet.getString(2));
+				user = new Users();
+				user.setName(rSet.getString(1));
+				user.setPwd(rSet.getString(2));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -62,20 +63,28 @@ public class AdminDao {
 			DBUtil.closePstmt(pstmt);
 			DBUtil.closeConn(conn);
 		}
-		return admin;
+		return user;
 	}
 
 	// 修改
-	public int chg(int id, Admin admin) {
+	public int chg(int id, Users user) {
 		Connection conn = DBUtil.getConn();
-		String sql = "update admin set name=?,pwd=? where id=?";
+		String sql = "update users set name=?,pwd=?,realname=?,sex=?,age=?,card=?,address=?,phone=?,email=?,code=? where id=?";
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, admin.getName());
-			pstmt.setString(2, admin.getPwd());
-			pstmt.setInt(3, id);
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getPwd());
+			pstmt.setString(3, user.getRealname());
+			pstmt.setString(4, user.getSex());
+			pstmt.setString(5, user.getAge());
+			pstmt.setString(6, user.getCard());
+			pstmt.setString(7, user.getAddress());
+			pstmt.setString(8, user.getPhone());
+			pstmt.setString(9, user.getEmail());
+			pstmt.setString(10, user.getCode());
+			pstmt.setInt(11, id);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

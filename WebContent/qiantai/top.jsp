@@ -153,7 +153,7 @@
 						</div>
 						<div
 							style="padding: 0px; font: bold 13px/43px 'Microsoft YaHei', 'SimSun', Arial, Sans-Serif; color: #feab43;">
-							亲爱的John您好!&nbsp;&nbsp;欢迎光临!</div>
+							亲爱的${user.name}您好!&nbsp;&nbsp;欢迎光临!</div>
 					</div>
 				</div>
 			</div>

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import dao.OrdersDao;
 import po.Orders;
+import po.OrdersSearch;
 import po.Page;
+import vo.OrdersInfo;
 import vo.OrdersStatistics;
 
 public class OrdersService {
@@ -28,9 +30,16 @@ public class OrdersService {
 	public int chg(int id,Orders orders) {
 		return ordersDao.chg(id, orders);
 	}
-	//根据用户id查询
-	public Orders find(String userid) {
-		return ordersDao.find(userid);
+	//删除
+	public int del(int id) {
+		return ordersDao.del(id);
+	}
+	//搜索——分页查询
+	public Page<OrdersInfo> find(Page<OrdersInfo> page, OrdersSearch search) {
+		return ordersDao.find(page,search);
+	}
+	public long findCount(OrdersSearch search) {
+		return ordersDao.findCount(search);
 	}
 	//统计
 	public ArrayList<OrdersStatistics> findStatistics() {

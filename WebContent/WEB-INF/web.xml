@@ -13,7 +13,6 @@
     <display-name>EncodingFilter</display-name>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>filter.EncodingFilter</filter-class>
-
   </filter>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
@@ -27,8 +26,8 @@
     <filter-name>AdminFilter</filter-name>
     <filter-class>filter.AdminFilter</filter-class>
     <init-param>
-    	<param-name>indexPath</param-name>
-    	<param-value>/admin/index.jsp</param-value>
+      <param-name>indexPath</param-name>
+      <param-value>/admin/index.jsp</param-value>
     </init-param>
   </filter>
   <filter-mapping>
@@ -88,5 +87,14 @@
     <servlet-name>OrdersServlet</servlet-name>
     <url-pattern>/OrdersServlet</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>UsersServlet</display-name>
+    <servlet-name>UsersServlet</servlet-name>
+    <servlet-class>servlet.UsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UsersServlet</servlet-name>
+    <url-pattern>/UsersServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

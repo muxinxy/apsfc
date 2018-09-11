@@ -50,7 +50,7 @@
           <div style="padding:0px">
             <div style="width:600px; height:210px;text-align:left;border:1px #f59d5e solid; background-color:#fdebd5;padding:30px;margin:0px">
               <div style="width:210px;float:left;text-align:left;border:1px #f59d5e solid;padding:20px;background-color:#ffffff;">
-                <form method="post" action="./index.jsp" name="form1" onsubmit="return verifyLogin()">
+                <form method="post" action="${pageContext.request.contextPath}/UsersServlet?method=login" name="form1" onsubmit="return verifyLogin()">
                   <div id="notice" class="noticediv"></div>
                   <table width="100%"  border="0" cellspacing="0" cellpadding="3">
                     <tr>

@@ -83,7 +83,7 @@ body {
 									class="left_txt">${item.times}</span></td>
 								<td class="line_table" align="center"><span
 									class="left_txt">
-									<c:choose>
+								<c:choose>
 									<c:when test="${item.delivery eq 1}">
 										是
 									</c:when>
@@ -92,26 +92,20 @@ body {
 									</c:otherwise>
 								</c:choose>
 									</span></td>
-								<td class="line_table" align="center">
+								
 								<c:choose>
 									<c:when test="${item.delivery eq 1}">
-										确认
+										<td class="line_table" align="center" colspan="2"/>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/OrdersServlet?method=yes&id=${item.id}">确认</a>
+										<td class="line_table" align="center">
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=yes&id=${item.id}&currentPage=${ordersPage.currentPage}">确认</a>
+										</td>
+										<td class="line_table" align="center">
+										<a href="${pageContext.request.contextPath}/OrdersServlet?method=no&id=${item.id}&currentPage=${ordersPage.currentPage}">取消</a>
+										</td>
 									</c:otherwise>
 								</c:choose>
-								</td>
-								<td class="line_table" align="center">
-								<c:choose>
-									<c:when test="${item.delivery eq 0}">
-										取消
-									</c:when>
-									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/OrdersServlet?method=no&id=${item.id}">取消</a>
-									</c:otherwise>
-								</c:choose>
-								</td>
 							</tr>
 							</c:forEach>
 							<tr>
