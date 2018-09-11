@@ -10,6 +10,6 @@
   </head>
   
   <body>
-  <script>window.location.href='qiantai/index.jsp';</script>
+  <script>window.location.href="${pageContext.request.contextPath}/IndexServlet?method=allInfo";</script>
   </body>
 </html>

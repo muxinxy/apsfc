@@ -40,7 +40,7 @@ public class UsersServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			// 转发
-			request.getRequestDispatcher("/qiantai/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 		// 失败——/qiantai/login.jsp
 		else {

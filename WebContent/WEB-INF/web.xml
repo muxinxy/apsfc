@@ -22,6 +22,23 @@
     <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
   <filter>
+    <display-name>UsersFilter</display-name>
+    <filter-name>UsersFilter</filter-name>
+    <filter-class>filter.UsersFilter</filter-class>
+    <init-param>
+      <param-name>indexPath</param-name>
+      <param-value>/qiantai/login.jsp</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>UsersFilter</filter-name>
+    <url-pattern>/UsersFilter</url-pattern>
+    <url-pattern>/qiantai/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <filter>
     <display-name>AdminFilter</display-name>
     <filter-name>AdminFilter</filter-name>
     <filter-class>filter.AdminFilter</filter-class>
@@ -96,5 +113,15 @@
   <servlet-mapping>
     <servlet-name>UsersServlet</servlet-name>
     <url-pattern>/UsersServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IndexServlet</display-name>
+    <servlet-name>IndexServlet</servlet-name>
+    <servlet-class>servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexServlet</servlet-name>
+    <url-pattern>/IndexServlet</url-pattern>
   </servlet-mapping>
 </web-app>

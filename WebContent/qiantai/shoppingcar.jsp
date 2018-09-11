@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,java.text.*"
 	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,37 +50,30 @@
 											<td class="line_table" align="center" width="20%"><span
 												class="left_bt2">&nbsp;&nbsp;</span></td>
 										</tr>
-
+										<c:set var="sumCount" value="0"></c:set>
+										<c:set var="sumMoney" value="0"></c:set>
+									<c:forEach items="${carList}" var="item">
 										<tr>
 											<td class="line_table" align="center" width="40%"><span
-												class="left_txt">糖醋排骨</span></td>
+												class="left_txt">${item.menusname}</span></td>
 											<td class="line_table" align="center" width="20%"><span
-												class="left_txt">24.0</span></td>
+												class="left_txt">${item.price}</span></td>
 											<td class="line_table" align="center" width="20%"><span
-												class="left_txt">1</span></td>
+												class="left_txt">${item.count}</span></td>
 											<td class="line_table" align="center" width="20%"><a
 												href="#">取消</a></td>
 										</tr>
-										<tr>
-											<td class="line_table" align="center" width="40%"><span
-												class="left_txt">咸肉菜饭</span></td>
-											<td class="line_table" align="center" width="20%"><span
-												class="left_txt">12.0</span></td>
-											<td class="line_table" align="center" width="20%"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center" width="20%"><a
-												href="#">取消</a></td>
-										</tr>
-
-
+										<c:set var="sumCount" value="${item.count+sumCount}"></c:set>
+										<c:set var="sumMoney" value="${item.price*item.count+sumMoney}"></c:set>
+									</c:forEach>
 										<tr>
 											<td class="line_table" align="center" colspan="4"><span
 												class="left_bt2">小&nbsp;&nbsp;计：</span>&nbsp; <span
-												style="color: #ff0000;">36.0</span>&nbsp;&nbsp; <span
+												style="color: #ff0000;">${sumMoney}</span>&nbsp;&nbsp; <span
 												class="left_bt2">元</span>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<span class="left_bt2">共：</span>&nbsp; <span
-												style="color: #ff0000;">2</span>&nbsp; <span
+												style="color: #ff0000;">${sumCount}</span>&nbsp; <span
 												class="left_bt2">份</span></td>
 
 										</tr>

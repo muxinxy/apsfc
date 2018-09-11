@@ -69,7 +69,7 @@
 								<div id="mainmenu">
 									<ul>
 
-										<li><a href="index.jsp" target="_self">首页</a></li>
+										<li><a href="${pageContext.request.contextPath}/IndexServlet?method=allInfo" target="_self">首页</a></li>
 
 										<li><a href="shoppingcar.jsp" target="_self">我的餐车</a></li>
 

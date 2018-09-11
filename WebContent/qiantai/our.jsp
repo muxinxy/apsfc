@@ -48,7 +48,7 @@
 		</tr>
 		<tr>
 		  <td  align="center"  >
-			 <a href="index.jsp" target="_self">
+			 <a href="${pageContext.request.contextPath}/IndexServlet?method=allInfo" target="_self">
 			 <span style="font-family: Helvetica, sans-serif;font-size: 16px;">
 			     返回
 			 </span></a>
