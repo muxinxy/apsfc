@@ -107,6 +107,24 @@ public class IndexServlet extends HttpServlet {
 		}
     	allInfo(request, response);
     }
+    protected void removeItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String menusidStr=request.getParameter("menusid");
+    	int menusid=Integer.parseInt(menusidStr);
+    	String menusname=request.getParameter("menusname");
+    	String price=request.getParameter("price");
+    	String countStr=request.getParameter("count");
+    	int count=Integer.parseInt(countStr);
+    	HttpSession session=request.getSession();
+    	ArrayList<CarItem> carList=(ArrayList<CarItem>) session.getAttribute("carList");
+    	CarItem item = new CarItem();
+		item.setMenusid(menusid);
+		item.setMenusname(menusname);
+		item.setPrice(price);
+		item.setCount(count);
+		carList.remove(item);
+		session.setAttribute("carList", carList);
+		allInfo(request, response);
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -117,6 +135,8 @@ public class IndexServlet extends HttpServlet {
 			allInfo(request, response);
 		}else if (method.equals("addItem")) {
 			addItem(request, response);
+		}else if (method.equals("removeItem")) {
+			removeItem(request, response);
 		}
 	}
 

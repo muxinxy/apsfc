@@ -61,7 +61,7 @@
 											<td class="line_table" align="center" width="20%"><span
 												class="left_txt">${item.count}</span></td>
 											<td class="line_table" align="center" width="20%"><a
-												href="#">取消</a></td>
+												href="${pageContext.request.contextPath}/IndexServlet?method=removeItem&menusid=${item.menusid}&menusname=${item.menusname}&price=${item.price}&count=${item.count}">取消</a></td>
 										</tr>
 										<c:set var="sumCount" value="${item.count+sumCount}"></c:set>
 										<c:set var="sumMoney" value="${item.price*item.count+sumMoney}"></c:set>

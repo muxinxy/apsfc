@@ -19,4 +19,8 @@ public class UsersService {
 		}
 		return usersDao.chg(id, user);
 	}
+	//注册
+	public int reg(Users user) {
+		return usersDao.add(user);
+	}
 }

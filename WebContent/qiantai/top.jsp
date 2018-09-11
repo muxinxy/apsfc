@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,11 +30,18 @@
 
 						<div style="padding: 0px">
 							<div id="topmenu">
-
-								<a href="login.jsp" target="_self">会员登录</a>| 
-								<a href="reg.jsp" target="_self">会员注册</a>| 
-								<a href="#">注销退出</a>| 
-								<a href="carry.jsp" target="_self">配送说明</a>| 
+							<c:choose>
+								<c:when test="${user==null}">
+									<a href="login.jsp" target="_self">会员登录   | </a>
+									<a href="reg.jsp" target="_self">会员注册   | </a>
+								</c:when>
+								<c:otherwise>
+									<a href="${pageContext.request.contextPath}/UsersServlet?method=logout">注销退出   | </a>
+								</c:otherwise>
+							</c:choose>
+								
+								
+								<a href="carry.jsp" target="_self">配送说明   | </a>
 								<a href="our.jsp" target="_self">关于我们</a>
 							</div>
 
@@ -79,8 +87,12 @@
 										<li><a href="carry.jsp" target="_self">配送说明</a></li>
 
 										<li><a href="our.jsp" target="_self">关于我们</a></li>
-
-										<li><a href="index.jsp">注销退出</a></li>
+								<c:choose>
+									<c:when test="${user!=null}">
+										<li><a href="${pageContext.request.contextPath}/UsersServlet?method=logout">注销退出</a></li>
+									</c:when>
+								</c:choose>
+										
 
 									</ul>
 								</div>
@@ -151,9 +163,13 @@
 								<a href="-1" style="line-height: 25px; color:">更多</a>
 							</div>
 						</div>
-						<div
-							style="padding: 0px; font: bold 13px/43px 'Microsoft YaHei', 'SimSun', Arial, Sans-Serif; color: #feab43;">
-							亲爱的${user.name}您好!&nbsp;&nbsp;欢迎光临!</div>
+								<c:choose>
+									<c:when test="${user!=null}">
+										<div style="padding: 0px; font: bold 13px/43px 'Microsoft YaHei', 'SimSun', Arial, Sans-Serif; color: #feab43;">
+										亲爱的${user.name}您好!&nbsp;&nbsp;欢迎光临!</div>
+									</c:when>
+								</c:choose>
+						
 					</div>
 				</div>
 			</div>

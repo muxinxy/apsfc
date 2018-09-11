@@ -79,7 +79,7 @@
   <tr>
     <td align="center" valign="center" height="450">
     
- <form action="./index.jsp" name="form1" method="post" onsubmit="return verifyInfo()">
+ <form action="${pageContext.request.contextPath}/UsersServlet?method=reg" name="form1" method="post" onsubmit="return verifyInfo()">
 
   <div align="center"><br>
   <table border="1" cellspacing="0" bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0" width="700">

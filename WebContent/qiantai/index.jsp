@@ -74,11 +74,15 @@
 																				<td><span>菜品类型:</span></td>
 																				<td><span>${item.typename}</span></td>
 																			</tr>
+																	<c:choose>
+																		<c:when test="${user!=null}">
 																			<tr>
 																				<td colspan="2" style="height: 40px;"><a
 																					href="${pageContext.request.contextPath}/IndexServlet?method=addItem&id=${item.id}">加入餐车</a></td>
 																				<td></td>
 																			</tr>
+																		</c:when>
+																	</c:choose>
 																		</table>
 																	</div>
 																</td>
@@ -155,6 +159,8 @@
 								<tr>
 									<td height="10">&nbsp;</td>
 								</tr>
+							<c:choose>
+								<c:when test="${user!=null}">
 								<tr>
 									<td valign="top">
 										<div id='pdv_3614' class='pdv_class' title='我的餐车'
@@ -248,6 +254,8 @@
 
 									</td>
 								</tr>
+								</c:when>
+							</c:choose>
 								<tr>
 									<td height="10">&nbsp;</td>
 								</tr>

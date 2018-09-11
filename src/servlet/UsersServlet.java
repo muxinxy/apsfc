@@ -57,8 +57,8 @@ public class UsersServlet extends HttpServlet {
 		session.removeAttribute("user");
 		// 跳转到登录页面
 		PrintWriter out = response.getWriter();
-		out.print("<script>" + "window.parent.location.href='" + request.getContextPath() + "/qiantai/index.jsp';"
-				+ "</script>");
+		out.print(
+				"<script>" + "window.parent.location.href='" + request.getContextPath() + "/index.jsp';" + "</script>");
 	}
 
 	protected void chg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,6 +82,40 @@ public class UsersServlet extends HttpServlet {
 		}
 	}
 
+	protected void reg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String pwd = request.getParameter("pwd");
+		String realname = request.getParameter("realname");
+		String sex = request.getParameter("sex");
+		String age = request.getParameter("age");
+		String card = request.getParameter("card");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String code = request.getParameter("code");
+		Users user = new Users();
+		user.setName(name);
+		user.setPwd(pwd);
+		user.setRealname(realname);
+		user.setSex(sex);
+		user.setAge(age);
+		user.setCard(card);
+		user.setAddress(address);
+		user.setPhone(phone);
+		user.setEmail(email);
+		user.setCode(code);
+		user.setType("1");
+		int result = usersService.reg(user);
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
+			out.print("<script>" + "alert('注册成功');" + "window.location.href='" + request.getContextPath()
+					+ "/qiantai/login.jsp';" + "</script>");
+		} else {
+			out.print("<script>" + "alert('注册失败');" + "window.location.href='" + request.getContextPath()
+					+ "/qiantai/reg.jsp';" + "</script>");
+		}
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -96,6 +130,8 @@ public class UsersServlet extends HttpServlet {
 			logout(request, response);
 		} else if (method.equals("chg")) {
 			chg(request, response);
+		} else if (method.equals("reg")) {
+			reg(request, response);
 		}
 	}
 

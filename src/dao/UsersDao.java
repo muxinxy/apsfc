@@ -6,10 +6,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import po.Admin;
+import po.Menus;
 import po.Users;
 import util.DBUtil;
 
 public class UsersDao {
+	//添加
+	public int add(Users user) {
+		//获取连接
+		Connection conn=DBUtil.getConn();
+		//sql语句
+		String sql="insert into users(name,pwd,realname,sex,age,card,address,phone,email,code,type) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getPwd());
+			pstmt.setString(3, user.getRealname());
+			pstmt.setString(4, user.getSex());
+			pstmt.setString(5, user.getAge());
+			pstmt.setString(6, user.getCard());
+			pstmt.setString(7, user.getAddress());
+			pstmt.setString(8, user.getPhone());
+			pstmt.setString(9, user.getEmail());
+			pstmt.setString(10, user.getCode());
+			pstmt.setString(11, user.getType());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DBUtil.closePstmt(pstmt);
+			DBUtil.closeConn(conn);
+		}
+		return result;	
+	}
 	// 根据用户名和密码查询
 	public Users findByNameAndPwd(String name, String pwd) {
 		Connection conn = DBUtil.getConn();
