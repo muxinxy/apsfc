@@ -129,7 +129,7 @@
 																餐厅公告</div>
 															<div
 																style="float: right; width: 60px; height: 43px; text-align: right; background: url(images/bg.jpg) -840px 0px no-repeat">
-																<a href="news/class/"
+																<a href="${pageContext.request.contextPath}/NoticeServlet?method=moreNews"
 																	style="font: 12px/43px simsun; color: #505050; margin-right: 12px; display: inline">更多&gt;&gt;</a>
 															</div>
 														</div>
@@ -137,12 +137,15 @@
 															
 
 															<ul class="newslist_time2">
-																<li class="newslist_time2"><div class="time">2015-02-28</div>
-																	<a href="#" class="newslist_time2">本店特色《咸菜肉饭》</a>
+															<c:set var="count" value="0"></c:set>
+															<c:forEach items="${newsList}" var="item">
+															<c:if test="${count<2}">
+																<li class="newslist_time2"><div class="time">${item.times}</div>
+																	<a href="${pageContext.request.contextPath}/IndexServlet?method=news&id=${item.id}&name=${item.name}&content=${item.content}&times=${item.times}" class="newslist_time2">${item.name}</a>
 																</li>
-																<li class="newslist_time2"><div class="time">2015-02-28</div>
-																	<a href="#" class="newslist_time2">新增菜单《糖醋排骨》</a>
-																</li>
+																<c:set var="count" value="${count+1}"></c:set>
+															</c:if>
+															</c:forEach>
 															</ul>
 
 
@@ -287,12 +290,10 @@
 																</div>
 																<div style="padding: px;">
 																	<div class="dingcanweekmenuinfo" align="left">
-																		<li class="newslist_time2"><div class="time">已销售4次</div>
-																			<a href="#" class="newslist_time2">糖醋排骨</a></li>
-																		<li class="newslist_time2"><div class="time">已销售4次</div>
-																			<a href="#" class="newslist_time2">咸肉菜饭</a></li>
-																		<li class="newslist_time2"><div class="time">已销售1次</div>
-																			<a href="#" class="newslist_time2">水煮鱼</a></li>
+																	<c:forEach items="${ordersRankList}" var="item">
+																		<li class="newslist_time2"><div class="time">已销售${item.menusum}次</div>
+																			<a href="#" class="newslist_time2">${item.menuname}</a></li>
+																	</c:forEach>
 																	</div>
 																</div>
 															</div>

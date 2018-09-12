@@ -48,4 +48,8 @@ public class OrdersService {
 	public ArrayList<OrdersStatistics> findStatistics() {
 		return ordersDao.findStatistics();
 	}
+	//排行榜
+	public ArrayList<OrdersInfo> ordersRank() {
+		return ordersDao.ordersRank();
+	}
 }

@@ -9,14 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import po.OrdersSearch;
+import po.Page;
 import po.Users;
+import service.OrdersService;
 import service.UsersService;
+import util.PageUtil;
+import vo.OrdersInfo;
 
 /**
  * Servlet implementation class UsersServlet
  */
 public class UsersServlet extends HttpServlet {
 	private UsersService usersService = new UsersService();
+	private OrdersService ordersService = new OrdersService();
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -62,8 +68,8 @@ public class UsersServlet extends HttpServlet {
 	}
 
 	protected void chg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idStr=request.getParameter("id");
-		int id=Integer.parseInt(idStr);
+		String idStr = request.getParameter("id");
+		int id = Integer.parseInt(idStr);
 		String name = request.getParameter("name");
 		String pwd = request.getParameter("pwd");
 		String realname = request.getParameter("realname");
@@ -74,7 +80,7 @@ public class UsersServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String code = request.getParameter("code");
-		
+
 		Users user = new Users();
 		user.setId(id);
 		user.setName(name);
@@ -135,6 +141,37 @@ public class UsersServlet extends HttpServlet {
 		}
 	}
 
+	protected void myOrders(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String currentPageStr = request.getParameter("currentPage");
+		String userid = request.getParameter("userid");
+		String menuname = request.getParameter("menuname");
+		String date = request.getParameter("date");
+		String delivery = request.getParameter("delivery");
+		int currentPage;
+		// 如果没有currentPage,默认查询第一页
+		if (currentPageStr == null) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(currentPageStr);
+		}
+		OrdersSearch search = new OrdersSearch();
+		search.setUserid(userid);
+		search.setMenuname(menuname);
+		search.setDate(date);
+		search.setDelivery(delivery);
+		// 总条数
+		long totalCount = ordersService.findCount(search);
+		// 创建一个Page对象 1.每页显示的条数 2.总条数 3.页数
+		Page<OrdersInfo> page = PageUtil.createPage(5, (int) totalCount, currentPage);
+		page = ordersService.find(page, search);
+		// 将查询到的内容存放在域对象中
+		request.setAttribute("myOrdersPage", page);
+		request.setAttribute("search", search);
+		// 转发到order.jsp
+		request.getRequestDispatcher("/qiantai/order.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -151,6 +188,8 @@ public class UsersServlet extends HttpServlet {
 			chg(request, response);
 		} else if (method.equals("reg")) {
 			reg(request, response);
+		} else if (method.equals("myOrders")) {
+			myOrders(request, response);
 		}
 	}
 

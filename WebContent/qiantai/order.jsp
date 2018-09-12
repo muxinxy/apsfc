@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*,java.text.*"
 	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/qiantai/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>我的订单</title>
@@ -33,7 +35,7 @@
 						<td align="left" valign="top">
 
 							<div align="center" width="120">
-								<form action="#" name="form1" method="post">
+								<form action="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}" name="form1" method="post">
 									<table id="table1" class="line_table"
 										style="width: 500px; margin: 0; padding: 0" cellSpacing="0"
 										cellPadding="0">
@@ -54,8 +56,8 @@
 											</tr>
 											<tr>
 												<td class="line_table" align="center" colspan="3"><a
-													href="#">我的所有订单</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">未派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
-													<a href="#">已派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+													href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}">我的所有订单</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}&delivery=0">未派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}&delivery=1">已派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 											</tr>
 									</table>
 								</form>
@@ -98,66 +100,73 @@
 											<td class="line_table" align="center"><span
 												class="left_bt2">是否派送</span></td>
 										</tr>
+										<c:forEach items="${myOrdersPage.list}" var="item">
 										<tr>
 											<td class="line_table" align="center"><span
-												class="left_txt">糖醋排骨</span></td>
+												class="left_txt">${item.menuname}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">John</span></td>
+												class="left_txt">${item.realname}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">110</span></td>
+												class="left_txt">${item.phone}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">qfsfdx</span></td>
+												class="left_txt">${item.address}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
+												class="left_txt">${item.menusum}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">24</span></td>
+												class="left_txt">${item.price}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">24</span></td>
+												class="left_txt">${item.menusum*item.price}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">2017-06-20 16:35:40</span></td>
+												class="left_txt">${item.times}</span></td>
 											<td class="line_table" align="center"><span
-												class="left_txt">否</span></td>
+												class="left_txt">
+											<c:choose>
+												<c:when test="${item.delivery eq 1}">是</c:when>
+												<c:otherwise>否</c:otherwise>
+											</c:choose>
+												</span></td>
 										</tr>
-										<tr>
-											<td class="line_table" align="center"><span
-												class="left_txt">咸肉菜饭</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">John</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">110</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">qfsfdx</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">12</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">12</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">2017-06-20 16:35:40</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">否</span></td>
-										</tr>
-										<tr>
-											<td class="line_table" align="center"><span
-												class="left_txt">水煮鱼</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">1</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">32.0</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">32.0</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">2017-06-20 16:35:40</span></td>
-											<td class="line_table" align="center"><span
-												class="left_txt">否</span></td>
-										</tr>
+										</c:forEach>
+							<tr>
+								<td class="line_table" align="center" colspan="12" height="20">
+								<span class="left_bt2">第${myOrdersPage.currentPage}页
+										&nbsp;&nbsp;共${myOrdersPage.totalPage}页
+								</span>&nbsp;&nbsp; 
+								    <c:choose>
+									<c:when test="${myOrdersPage.currentPage eq 1}">
+										[首页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&currentPage=1&userid=${search.userid}&menuname=${search.menuname}&date=${search.date}&delivery=${search.delivery}">[首页]</a>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${myOrdersPage.currentPage eq myOrdersPage.totalPage}">
+										[尾页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&currentPage=${myOrdersPage.totalPage}&userid=${search.userid}&menuname=${search.menuname}&date=${search.date}&delivery=${search.delivery}">[尾页]</a>
+									</c:otherwise>
+								</c:choose>
+								    &nbsp;&nbsp;
+								<c:choose>
+									<c:when test="${myOrdersPage.hasPrePage eq false}">
+										[上一页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&currentPage=${myOrdersPage.currentPage-1}&userid=${search.userid}&menuname=${search.menuname}&date=${search.date}&delivery=${search.delivery}">[上一页]</a>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${myOrdersPage.hasNextPage eq false}">
+										[下一页]
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&currentPage=${myOrdersPage.currentPage+1}&userid=${search.userid}&menuname=${search.menuname}&date=${search.date}&delivery=${search.delivery}">[下一页]</a>
+									</c:otherwise>
+								</c:choose>
+								</td>
+							</tr>
 								</table>
 							</div>
 						</td>

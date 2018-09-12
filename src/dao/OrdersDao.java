@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javafx.scene.Parent;
@@ -219,7 +220,7 @@ public class OrdersDao {
 				sql = sql + "&& o.times like ? ";
 				params.add(search.getDate() + "%");
 			}
-			if (search.getMenuname() != null && search.getMenuname().trim().length() != 0) {
+			if (search.getDelivery() != null && search.getDelivery().trim().length() != 0) {
 				sql = sql + "&& o.delivery=? ";
 				params.add(search.getDelivery());
 			}
@@ -283,7 +284,7 @@ public class OrdersDao {
 				sql = sql + "&& o.times like ? ";
 				params.add(search.getDate() + "%");
 			}
-			if (search.getMenuname() != null && search.getMenuname().trim().length() != 0) {
+			if (search.getDelivery() != null && search.getDelivery().trim().length() != 0) {
 				sql = sql + "&& o.delivery=? ";
 				params.add(search.getDelivery());
 			}
@@ -344,6 +345,62 @@ public class OrdersDao {
 			DBUtil.closeRst(rSet);
 			DBUtil.closePstmt(pstmt);
 			DBUtil.closeConn(conn);
+		}
+		return list;
+	}
+	public ArrayList<OrdersInfo> ordersRank() {
+//		String preTime=null;
+//		String currentTime=null;
+//		Date date = new Date();
+//		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		currentTime = sf.format(date);
+//		Calendar calendar = Calendar.getInstance();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//		Calendar cal = Calendar.getInstance();
+//		cal.setTime(date);
+//		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+//        if (w < 0)
+//            w = 7;
+//		calendar.add(Calendar.DATE, -w);
+//		preTime = sdf.format(calendar.getTime());
+//		preTime = preTime + " 23:59:59";
+		Connection conn = DBUtil.getConn();
+		String sql = "SELECT "
+				+ "m.name,COUNT(o.menusum) "
+				+ "FROM menus m,orders o "
+				+ "WHERE "
+				+ "m.id=o.menuid"
+				+ " GROUP BY m.name "
+				+ "ORDER BY COUNT(o.menusum) DESC";
+//		String sql = "SELECT "
+//				+ "m.name,COUNT(o.menusum) "
+//				+ "FROM "
+//				+ "menus m,orders o "
+//				+ "WHERE "
+//				+ "m.id=o.menuid && o.times>'"
+//				+ preTime
+//				+ "' && o.times<'"
+//				+ currentTime
+//				+ "' GROUP BY m.name "
+//				+ "ORDER BY "
+//				+ "COUNT(o.menusum) DESC";
+		PreparedStatement pstmt = null;
+		OrdersInfo ordersInfo=null;
+		ResultSet rSet = null;
+		ArrayList<OrdersInfo> list = new ArrayList<OrdersInfo>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ordersInfo = new OrdersInfo();
+			rSet = pstmt.executeQuery();
+			while (rSet.next()) {
+				ordersInfo = new OrdersInfo();
+				ordersInfo.setMenuname(rSet.getString(1));
+				ordersInfo.setMenusum(rSet.getString(2));
+				list.add(ordersInfo);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}

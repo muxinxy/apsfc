@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
 import po.CarItem;
 import po.Menus;
+import po.Notice;
 import po.Orders;
 import po.Page;
 import service.MenusService;
+import service.NoticeService;
 import service.OrdersService;
 import util.PageUtil;
 import vo.MenusInfo;
+import vo.OrdersInfo;
 
 /**
  * Servlet implementation class IndexServlet
@@ -31,6 +31,7 @@ public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MenusService menusService = new MenusService();
 	private OrdersService ordersService = new OrdersService();
+	private NoticeService noticeService = new NoticeService();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -61,8 +62,14 @@ public class IndexServlet extends HttpServlet {
 		page = menusService.findByPage(page);
 		// 把page保存到域中
 		request.setAttribute("menusPage", page);
+		ArrayList<Notice> newsList = noticeService.findAll();
+		// 把查询到的信息添加到request域中
+		request.setAttribute("newsList", newsList);
+		ArrayList<OrdersInfo> ordersRankList=ordersService.ordersRank();
+		request.setAttribute("ordersRankList", ordersRankList);
 		// 转发到index.jsp
 		request.getRequestDispatcher("/qiantai/index.jsp").forward(request, response);
+
 	}
 
 	protected void addItem(HttpServletRequest request, HttpServletResponse response)
@@ -111,62 +118,82 @@ public class IndexServlet extends HttpServlet {
 		allInfo(request, response);
 	}
 
-	protected void removeItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String menusidStr=request.getParameter("menusid");
-    	int menusid=Integer.parseInt(menusidStr);
-    	
-    	HttpSession session=request.getSession();
-    	ArrayList<CarItem> carList=(ArrayList<CarItem>) session.getAttribute("carList");
-    	
-		for(CarItem carItem : carList){
-			if(carItem.getMenusid() == menusid){
+	protected void removeItem(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String menusidStr = request.getParameter("menusid");
+		int menusid = Integer.parseInt(menusidStr);
+
+		HttpSession session = request.getSession();
+		ArrayList<CarItem> carList = (ArrayList<CarItem>) session.getAttribute("carList");
+
+		for (CarItem carItem : carList) {
+			if (carItem.getMenusid() == menusid) {
 				carList.remove(carItem);
 				break;
 			}
 		}
-        session.setAttribute("carList", carList);
-        allInfo(request, response);
-    }
-	protected void removeAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession session=request.getSession();
-    	ArrayList<CarItem> carList=(ArrayList<CarItem>) session.getAttribute("carList");
-        session.removeAttribute("carList");
-        allInfo(request, response);
-    }
+		session.setAttribute("carList", carList);
+		allInfo(request, response);
+	}
+
+	protected void removeAll(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		ArrayList<CarItem> carList = (ArrayList<CarItem>) session.getAttribute("carList");
+		session.removeAttribute("carList");
+		allInfo(request, response);
+	}
+
 	protected void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-    	ArrayList<CarItem> carList=(ArrayList<CarItem>) session.getAttribute("carList");
-    	String userid=request.getParameter("userid");
-    	Orders order=new Orders();
-    	int result=1;
-    	for(CarItem carItem:carList){
-    		order.setUserid(userid);
-    		int menuid=carItem.getMenusid();
-    		String menuidStr=String.valueOf(menuid);
-    		order.setMenuid(menuidStr);
-    		int menusum=carItem.getMenusid();
-    		String menusumStr=String.valueOf(menusum);
-    		order.setMenusum(menusumStr);
-    		Date d = new Date();
-    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    		String times = sdf.format(d);
-    		order.setTimes(times);
-    		order.setDelivery("0");
-    		int res=ordersService.add(order);
-    		if (res!=1) {
-				result=0;
+		HttpSession session = request.getSession();
+		ArrayList<CarItem> carList = (ArrayList<CarItem>) session.getAttribute("carList");
+		String userid = request.getParameter("userid");
+		Orders order = new Orders();
+		int result = 1;
+		for (CarItem carItem : carList) {
+			order.setUserid(userid);
+			int menuid = carItem.getMenusid();
+			String menuidStr = String.valueOf(menuid);
+			order.setMenuid(menuidStr);
+			int menusum = carItem.getMenusid();
+			String menusumStr = String.valueOf(menusum);
+			order.setMenusum(menusumStr);
+			Date d = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String times = sdf.format(d);
+			order.setTimes(times);
+			order.setDelivery("0");
+			int res = ordersService.add(order);
+			if (res != 1) {
+				result = 0;
 			}
-    	}
-    	PrintWriter out = response.getWriter();
-    	if (result==1) {
+		}
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
 			out.print("<script>" + "alert('提交成功');" + "window.location.href='" + request.getContextPath()
 					+ "/qiantai/index.jsp';" + "</script>");
-		}else {
+		} else {
 			out.print("<script>" + "alert('提交失败');" + "window.location.href='" + request.getContextPath()
 					+ "/qiantai/index.jsp';" + "</script>");
 		}
-    	removeAll(request, response);
-    }
+		removeAll(request, response);
+	}
+
+	protected void news(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idStr = request.getParameter("id");
+		int id = Integer.parseInt(idStr);
+		String name = request.getParameter("name");
+		String content = request.getParameter("content");
+		String times = request.getParameter("times");
+		Notice notice = new Notice();
+		notice.setId(id);
+		notice.setName(name);
+		notice.setContent(content);
+		notice.setTimes(times);
+		request.setAttribute("news", notice);
+		request.getRequestDispatcher("/qiantai/news.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -185,6 +212,8 @@ public class IndexServlet extends HttpServlet {
 			removeAll(request, response);
 		} else if (method.equals("add")) {
 			add(request, response);
+		} else if (method.equals("news")) {
+			news(request, response);
 		}
 	}
 

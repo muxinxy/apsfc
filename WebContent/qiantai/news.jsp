@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/qiantai/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>公告通知</title>
@@ -31,20 +32,20 @@
     
 		<tr>
 		  <td  align="center" vlign="top"  >
-			 <strong><span style="font-family: Helvetica, sans-serif;font-size: 20px;">本店特色《咸菜肉饭》</span></strong>
+			 <strong><span style="font-family: Helvetica, sans-serif;font-size: 20px;">${news.name}</span></strong>
 			 <br>
-			 <span style=" font-size: 10px;">2015-02-28 13:53:39</span>
+			 <span style=" font-size: 10px;">${news.times}</span>
 		  </td>
 		</tr>
 		<tr>
 		  <td  align="left" vlign="top" >
 			
-             <span style=" font-size: 14px;"><br>&nbsp;&nbsp;&nbsp;&nbsp; 记得小时候每每妈妈做咸肉菜饭，我都要吃上二大碗，那个香啊那个好吃啊，真的不知道怎样来形容。吃过的朋友，大家都懂的，呵呵！</span><br><br>
+             <span style=" font-size: 14px;"><br>&nbsp;&nbsp;&nbsp;&nbsp; ${news.content}</span><br><br>
 		  </td>
 		</tr>
 		<tr>
 		  <td  align="center"  >
-			 <a href="index.jsp" target="_self">
+			 <a href="${pageContext.request.contextPath}/IndexServlet?method=allInfo" target="_self">
 			 <span style="font-family: Helvetica, sans-serif;font-size: 16px;">
 			     返回
 			 </span></a>

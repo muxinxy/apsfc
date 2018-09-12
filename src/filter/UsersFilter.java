@@ -56,7 +56,9 @@ public class UsersFilter implements Filter {
 		if (user != null || path.equals(indexPath) || path.endsWith(".css") || path.endsWith(".js")
 				|| path.endsWith(".gif") || path.endsWith(".jpg") || path.equals("/qiantai/reg.jsp")
 				 || path.equals("/qiantai/index.jsp") || path.equals("/qiantai/notice.jsp")
-				 || path.equals("/qiantai/our.jsp") || path.equals("/qiantai/copyright.jsp") || path.equals("/qiantai/carry.jsp")) {
+				 || path.equals("/qiantai/our.jsp") || path.equals("/qiantai/copyright.jsp") 
+				 || path.equals("/qiantai/carry.jsp") || path.equals("/qiantai/news_more.jsp") 
+				 || path.equals("/qiantai/news.jsp")) {
 			chain.doFilter(request, response);
 		} else {
 			req.getRequestDispatcher("/qiantai/login.jsp").forward(request, response);
