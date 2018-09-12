@@ -11,7 +11,10 @@ import vo.OrdersStatistics;
 
 public class OrdersService {
 	private OrdersDao ordersDao = new OrdersDao();
-
+	//添加
+	public int add(Orders order) {
+		return ordersDao.add(order);
+	}
 	// 查询所有
 	public ArrayList<Orders> findAll() {
 		return ordersDao.findAll();

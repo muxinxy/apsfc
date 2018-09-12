@@ -219,6 +219,10 @@ public class OrdersDao {
 				sql = sql + "&& o.times like ? ";
 				params.add(search.getDate() + "%");
 			}
+			if (search.getMenuname() != null && search.getMenuname().trim().length() != 0) {
+				sql = sql + "&& o.delivery=? ";
+				params.add(search.getDelivery());
+			}
 		}
 		sql = sql + "limit ?,?";
 		params.add(page.getBeginIndex());
@@ -278,6 +282,10 @@ public class OrdersDao {
 			if (search.getDate() != null && search.getDate().trim().length() != 0) {
 				sql = sql + "&& o.times like ? ";
 				params.add(search.getDate() + "%");
+			}
+			if (search.getMenuname() != null && search.getMenuname().trim().length() != 0) {
+				sql = sql + "&& o.delivery=? ";
+				params.add(search.getDelivery());
 			}
 		}
 		PreparedStatement pstmt = null;

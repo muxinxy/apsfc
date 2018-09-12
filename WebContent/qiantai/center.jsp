@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,java.text.*"
 	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,7 +72,7 @@
 		<tr>
 			<td align="center" valign="center" height="450">
 
-				<form action="index.jsp" name="form1" method="post"
+				<form action="${pageContext.request.contextPath}/UsersServlet?method=chg&id=${user.id}&name=${user.name}" name="form1" method="post"
 					onsubmit="return verifyInfo()">
 
 					<div align="center">
@@ -89,7 +90,7 @@
 									height="25" align="right"><font color="#996633">用 户
 										名：</font></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
-									height="25" align="left"><font color="red">John</font>
+									height="25" align="left"><font color="red">${user.name}</font>
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
@@ -101,7 +102,7 @@
 										&nbsp;码：</font></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7"
-									type="password" name="pwd" value="1111" /></td>
+									type="password" name="pwd" value="" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>长度必须大于5个小于16个字符，只能为英语字、数字</td>
@@ -112,7 +113,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7"
-									type="password" name="qpwd" value="1111" /></td>
+									type="password" name="qpwd" value="" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请将输入的密码再次输入</td>
@@ -123,7 +124,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="realname" value="John" /></td>
+									name="realname" value="${user.realname}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>填写您的真实的姓名</td>
@@ -132,9 +133,21 @@
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="right"><font color="#996633">性&nbsp;
 										&nbsp;&nbsp;别：</font></td>
-								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
-									height="25" align="left">
-									<font color="red">男</font> 
+								<td  bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0" height="25" align="left">
+								<c:choose>
+									<c:when test="${user.sex eq '男'}">
+										<input type="radio" name="sex" checked value="男">
+										男&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="sex" value="女">
+										女
+									</c:when>
+									<c:otherwise>
+										<input type="radio" name="sex" value="男">
+										男&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="sex" checked value="女">
+										女
+									</c:otherwise>
+								</c:choose>
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
@@ -146,7 +159,7 @@
 										&nbsp;龄：</font></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="age" value="19" /></td>
+									name="age" value="${user.age}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请输入您的真实年龄</td>
@@ -157,7 +170,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="card" value="3701111111111111" /></td>
+									name="card" value="${user.card}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请填写您的真实信息</td>
@@ -168,7 +181,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="address" value="qfsfdx" /></td>
+									name="address" value="${user.address}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请填写您的真实信息</td>
@@ -179,7 +192,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="phone" value="1234567890" /></td>
+									name="phone" value="${user.phone}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请填写您的真实信息(格式为02411111111或13911111111)</td>
@@ -190,7 +203,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="email" value="john@126.com" /></td>
+									name="email" value="${user.email}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请填写您有效的邮件地址，以便于我们为您提供有效的服务。</td>
@@ -201,7 +214,7 @@
 								</td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><input class="input7" type="text"
-									name="code" value="272000" /></td>
+									name="code" value="${user.code}" /></td>
 								<td bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
 									height="25" align="left"><font color="red">&nbsp;*
 								</font>请填写您的真实信息(格式为111111)</td>

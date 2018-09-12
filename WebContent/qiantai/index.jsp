@@ -203,7 +203,7 @@
 																		<td align="center">${item.price}</td>
 																		<td align="center">${item.count}</td>
 																		<td align="center"><a
-																			href="#">取消</a></td>
+																			href="${pageContext.request.contextPath}/IndexServlet?method=removeItem&menusid=${item.menusid}">取消</a></td>
 																	</tr>
 																<c:set var="sumCount" value="${item.count+sumCount}"></c:set>
 																<c:set var="sumMoney" value="${item.price*item.count+sumMoney}"></c:set>
@@ -226,10 +226,10 @@
 																		<tr>
 																			<td align="center" width="40%"></td>
 																			<td align="center" width="40%"><a
-																				href="../UserOrderingServlet"><img
+																				href="${pageContext.request.contextPath}/IndexServlet?method=add&userid=${user.id}"><img
 																					src="images/canche_submit.gif" border="0" /></a></td>
 																			<td align="center" width="40%"><a
-																				href="../ShoppingServlet?remove=1"><img
+																				href="${pageContext.request.contextPath}/IndexServlet?method=removeAll"><img
 																					src="images/quxiao2.gif" border="0" /></a></td>
 																		</tr>
 																	</table>

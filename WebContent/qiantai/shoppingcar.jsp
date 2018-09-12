@@ -61,7 +61,7 @@
 											<td class="line_table" align="center" width="20%"><span
 												class="left_txt">${item.count}</span></td>
 											<td class="line_table" align="center" width="20%"><a
-												href="${pageContext.request.contextPath}/IndexServlet?method=removeItem&menusid=${item.menusid}&menusname=${item.menusname}&price=${item.price}&count=${item.count}">取消</a></td>
+												href="${pageContext.request.contextPath}/IndexServlet?method=removeItem&menusid=${item.menusid}">取消</a></td>
 										</tr>
 										<c:set var="sumCount" value="${item.count+sumCount}"></c:set>
 										<c:set var="sumMoney" value="${item.price*item.count+sumMoney}"></c:set>
@@ -80,11 +80,11 @@
 
 										<tr>
 											<td class="line_table" align="center" colspan="4"
-												valign="center"><a href="#"><img
+												valign="center"><a href="${pageContext.request.contextPath}/IndexServlet?method=add&userid=${user.id}"><img
 													src="images/canche_submit.gif" border="0" /></a>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-												<a href="#"><img
+												<a href="${pageContext.request.contextPath}/IndexServlet?method=removeAll"><img
 													src="images/quxiao2.gif" border="0" /></a></td>
 
 										</tr>

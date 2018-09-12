@@ -4,6 +4,7 @@ public class OrdersSearch {
 	private String userid;
 	private String menuname;
 	private String date;
+	private String delivery;
 	public String getUserid() {
 		return userid;
 	}
@@ -22,9 +23,16 @@ public class OrdersSearch {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
 	@Override
 	public String toString() {
-		return "OrdersSearch [userid=" + userid + ", menuname=" + menuname + ", date=" + date + "]";
+		return "OrdersSearch [userid=" + userid + ", menuname=" + menuname + ", date=" + date + ", delivery=" + delivery
+				+ "]";
 	}
 	
 }

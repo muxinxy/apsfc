@@ -40,7 +40,6 @@ public class NoticeServlet extends HttpServlet {
     	String name=request.getParameter("name");
     	String content=request.getParameter("content");
     	Date d = new Date();
-		System.out.println(d);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String times = sdf.format(d);
     	Notice notice=new Notice();

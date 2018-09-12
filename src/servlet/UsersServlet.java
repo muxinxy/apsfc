@@ -62,13 +62,32 @@ public class UsersServlet extends HttpServlet {
 	}
 
 	protected void chg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idStr=request.getParameter("id");
+		int id=Integer.parseInt(idStr);
 		String name = request.getParameter("name");
 		String pwd = request.getParameter("pwd");
-		String idStr = request.getParameter("id");
-		int id = Integer.parseInt(idStr);
+		String realname = request.getParameter("realname");
+		String sex = request.getParameter("sex");
+		String age = request.getParameter("age");
+		String card = request.getParameter("card");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String code = request.getParameter("code");
+		
 		Users user = new Users();
+		user.setId(id);
 		user.setName(name);
 		user.setPwd(pwd);
+		user.setRealname(realname);
+		user.setSex(sex);
+		user.setAge(age);
+		user.setCard(card);
+		user.setAddress(address);
+		user.setPhone(phone);
+		user.setEmail(email);
+		user.setCode(code);
+		user.setType("1");
 		int result = usersService.chg(id, user);
 		PrintWriter out = response.getWriter();
 		if (result == 1) {

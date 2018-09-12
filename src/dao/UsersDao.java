@@ -46,7 +46,7 @@ public class UsersDao {
 	// 根据用户名和密码查询
 	public Users findByNameAndPwd(String name, String pwd) {
 		Connection conn = DBUtil.getConn();
-		String sql = "select id,name,pwd from users where name=? && pwd=?";
+		String sql = "select * from users where name=? && pwd=?";
 		PreparedStatement pstmt = null;
 		ResultSet rSet = null;
 		Users user = null;
@@ -60,6 +60,15 @@ public class UsersDao {
 				user.setId(rSet.getInt(1));
 				user.setName(rSet.getString(2));
 				user.setPwd(rSet.getString(3));
+				user.setRealname(rSet.getString(4));
+				user.setSex(rSet.getString(5));
+				user.setAge(rSet.getString(6));
+				user.setCard(rSet.getString(7));
+				user.setAddress(rSet.getString(8));
+				user.setPhone(rSet.getString(9));
+				user.setEmail(rSet.getString(10));
+				user.setCode(rSet.getString(11));
+				user.setType(rSet.getString(12));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,8 +94,9 @@ public class UsersDao {
 			rSet = pstmt.executeQuery();
 			if (rSet.next()) {
 				user = new Users();
-				user.setName(rSet.getString(1));
-				user.setPwd(rSet.getString(2));
+				user.setId(rSet.getInt(1));
+				user.setName(rSet.getString(2));
+				user.setPwd(rSet.getString(3));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -102,7 +112,7 @@ public class UsersDao {
 	// 修改
 	public int chg(int id, Users user) {
 		Connection conn = DBUtil.getConn();
-		String sql = "update users set name=?,pwd=?,realname=?,sex=?,age=?,card=?,address=?,phone=?,email=?,code=? where id=?";
+		String sql = "update users set name=?,pwd=?,realname=?,sex=?,age=?,card=?,address=?,phone=?,email=?,code=?,type=? where id=?";
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
@@ -117,7 +127,8 @@ public class UsersDao {
 			pstmt.setString(8, user.getPhone());
 			pstmt.setString(9, user.getEmail());
 			pstmt.setString(10, user.getCode());
-			pstmt.setInt(11, id);
+			pstmt.setString(11, user.getType());
+			pstmt.setInt(12, id);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
