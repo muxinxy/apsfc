@@ -155,7 +155,7 @@ public class IndexServlet extends HttpServlet {
 			int menuid = carItem.getMenusid();
 			String menuidStr = String.valueOf(menuid);
 			order.setMenuid(menuidStr);
-			int menusum = carItem.getMenusid();
+			int menusum = carItem.getCount();
 			String menusumStr = String.valueOf(menusum);
 			order.setMenusum(menusumStr);
 			Date d = new Date();

@@ -56,7 +56,8 @@
 											</tr>
 											<tr>
 												<td class="line_table" align="center" colspan="3"><a
-													href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}">我的所有订单</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}&delivery=0">未派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}">我的所有订单</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+													<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}&delivery=0">未派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a href="${pageContext.request.contextPath}/UsersServlet?method=myOrders&userid=${user.id}&delivery=1">已派送订单</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 											</tr>
 									</table>
